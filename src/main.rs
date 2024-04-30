@@ -18,11 +18,12 @@ mod grid;
 use grid::Grid;
 
 // Define a constant for the array size
-const ARRAY_SIZE: usize = 3;
+const ARRAY_SIZE: usize = 5;
 
 fn main() {
     clear();
     let mut grid: Grid = Grid::new(&ARRAY_SIZE);
+
     print!("{}", grid);
 }
 
