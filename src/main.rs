@@ -23,7 +23,12 @@ const ARRAY_SIZE: usize = 5;
 fn main() {
     clear();
     let mut grid: Grid = Grid::new(&ARRAY_SIZE);
-
+    let starting_state = r#"
+    X X X
+    X X X
+    X X X
+    "#;
+    grid.set_input(starting_state.clone());
     print!("{}", grid);
 }
 
