@@ -16,26 +16,44 @@ use ansi_codes::{
 mod grid;
 use grid::Grid;
 
-// Define a constant for the array size
-const ARRAY_SIZE: usize = 3;
+const X: &str = "X";
 
-fn main() ->  Result<(), String> {
+fn main() {
     // clear();
-    let mut grid: Grid = Grid::new(&ARRAY_SIZE);
     let starting_state = r#"
     X X X
     X X X
     X X X
     "#;
+    let grid = init(starting_state);
+    print!("{}", grid);
+}
+
+fn init(starting_state: &str) -> Grid{
+    let mut grid: Grid;
+    let mut array_size: usize = 0;
+    for line in starting_state.lines(){
+        array_size = line.matches(X).count();
+        if array_size == 0{
+            continue;
+        }
+        break
+    }
+    
+    match Grid::new(&array_size) {
+        Ok(g) => grid = g,
+        Err(error) => panic!("{}", error)
+    }
+
     match grid.set_input(starting_state){
         Ok(_) =>  {}
         Err(error) => {
             panic!("Error is: {}", error)
         }
     }
-    let x = grid.set_input(starting_state)?;
-    print!("{}", grid);
-    Ok(())
+    // DON'T pass a reference
+    // this is MOVING ownership from init() to the parent function
+    return grid
 }
 
 fn progress_life(grid: &mut Grid) {}
