@@ -30,15 +30,17 @@ impl Grid {
     }
 
 
-    pub fn set_input(&mut self, input_str: &str) -> Option<E>{
+    pub fn set_input(&mut self, input_str: &str) -> Result<(), String>{
 
         // by gpt. i haven't actually looked at closures properly yet
         let input_str: String = input_str.chars()
-        .filter(|&c| !c.is_whitespace())
-        .collect();
+            .filter(|&c| !c.is_whitespace())
+            .collect();
 
-        if len(input_str) != self.size * 2{
-            Err(format!("Starting state values must conatins {} values", self.size * 2));
+        if input_str.len() != self.size * self.size{
+            return Err(format!(
+                "Starting state values must conatins {} values",
+                self.size * self.size));
         }
 
         let mut i: usize = 0;
@@ -53,6 +55,7 @@ impl Grid {
                 i += 1;
             }
         }
+        Ok(())
     }
 }
 

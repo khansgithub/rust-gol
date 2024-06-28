@@ -6,7 +6,6 @@
 use std::fmt;
 use std::io::{self, Write};
 use std::ptr::null;
-use std::thread;
 use std::time::Duration;
 
 use ansi_codes::{
@@ -18,18 +17,25 @@ mod grid;
 use grid::Grid;
 
 // Define a constant for the array size
-const ARRAY_SIZE: usize = 5;
+const ARRAY_SIZE: usize = 3;
 
-fn main() {
-    clear();
+fn main() ->  Result<(), String> {
+    // clear();
     let mut grid: Grid = Grid::new(&ARRAY_SIZE);
     let starting_state = r#"
     X X X
     X X X
     X X X
     "#;
-    grid.set_input(starting_state.clone());
+    match grid.set_input(starting_state){
+        Ok(_) =>  {}
+        Err(error) => {
+            panic!("Error is: {}", error)
+        }
+    }
+    let x = grid.set_input(starting_state)?;
     print!("{}", grid);
+    Ok(())
 }
 
 fn progress_life(grid: &mut Grid) {}
