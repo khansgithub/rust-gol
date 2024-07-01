@@ -65,23 +65,53 @@ fn init(starting_state: &str) -> Grid{
     return grid
 }
 
+// fn progress_life(grid: &mut Grid) {
+//     clear();
+//     print!("{}", grid);
+//     loop{
+//         // sleep(Duration::from_millis(40));
+//         sleep(Duration::from_secs(1));
+//         let update_array: Vec<[usize; 3]> = grid.life();
+//         for update in update_array.iter(){
+//             // println!("{}, {}", update[0], update[1]);
+//             set_cursor_position(update[0], update[1]);
+//             print!("=")
+//         }
+//         break;
+//         clear();
+//         print!("{}", grid);
+//         if update_array.len() == 0{
+//             break;
+//         }
+//     }
+// }
+
 fn progress_life(grid: &mut Grid) {
+    hide_cursor();
     clear();
     print!("{}", grid);
-    loop{
-        // sleep(Duration::from_millis(40));
-        sleep(Duration::from_secs(1));
+    let mut x: usize;
+    let mut y: usize = 0;
+    loop {
+        sleep(Duration::from_millis(100));
+        // sleep(Duration::from_secs(1));
+        let arr: &Vec<_> = &grid.arr;
         let update_array: Vec<[usize; 3]> = grid.life();
         for update in update_array.iter(){
-            // println!("{}, {}", update[0], update[1]);
-            set_cursor_position(update[0], update[1]);
-            print!("=")
+            let [x, y, new_cell] = update;
+            set_cursor_position(*x, *y);
+            print!("{}", if *new_cell == 1 {"X"} else {" "})
         }
-        break;
-        clear();
-        print!("{}", grid);
-        if update_array.len() == 0{
-            break;
-        }
+        // for row in arr{
+        //     x = 0;
+        //     for cell in row{
+        //         set_cursor_position(x, y);
+        //         print!("{}", if *cell {"."} else {"_"});
+        //         x += 1;
+        //     }
+        // y += 1;
+        // }
+        // return;
     }
+
 }

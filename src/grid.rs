@@ -4,7 +4,7 @@ use crate::X;
 
 #[derive(Debug)]
 pub struct Grid {
-    arr: Vec<Vec<bool>>,
+    pub arr: Vec<Vec<bool>>,
     // update_arr: *mut Vec<[usize; 3]>,
     size: usize,
     // coordinates: Vec<&_>
